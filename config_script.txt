@@ -1,0 +1,22 @@
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install git
+sudo apt-get install openoffice.org
+sudo apt-get install gitk
+sudo apt-get install kate
+sudo apt-get install gedit
+apt-get install htop
+sudo apt-get install mysql
+sudo apt-get clean
+sudo apt-get check
+
+cd
+mkdir reference
+cd reference
+wget http://linux-training.be/linuxfun.pdf
+
+
+
+
+# sudo nano /etc/default/keyboard
+

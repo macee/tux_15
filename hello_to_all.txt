@@ -1,0 +1,3 @@
+echo Welcome to the Linux class!  > temp.txt		# Hello message
+w| cut -d' ' -f1 >> temp.txt				# Get list of logen in users
+sudo wall temp.txt					# broadcast to allwhat
