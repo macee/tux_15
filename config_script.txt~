@@ -10,7 +10,16 @@ sudo apt-get install mysql
 sudo apt-get clean
 sudo apt-get check
 
- 
+cd
+mkdir reference
+cd reference
+wget http://linux-training.be/linuxfun.pdf
+
+cd
+git clone https://github.com/macee/tux_15.git
+
+
+
 
 # sudo nano /etc/default/keyboard
 
