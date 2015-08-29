@@ -1,0 +1,5 @@
+Welcome to the Linux class!
+
+USER
+pi
+pi
