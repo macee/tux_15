@@ -12,13 +12,7 @@ from thread import *
 
 
 def readserialthread():
-<<<<<<< HEAD
-	while 1:
-		data = ser.readline()
-		msg_queue.put(data)
-		#print data
 
-=======
 	target = open("GPS_data.txt", 'a')
 	target.truncate()	
 	while 1:
@@ -39,7 +33,7 @@ def readserialthread():
 			#print data
 		except:
 			print "gps binary transfer error"
->>>>>>> 8cd66d00285719979817ded4a027eacc4e8c75af
+
 
 def clientthread(conn):
 
@@ -48,10 +42,7 @@ def clientthread(conn):
 	while True:
          
 		line = msg_queue.get()
-<<<<<<< HEAD
-=======
 		print '{:x}'.format(line)
->>>>>>> 8cd66d00285719979817ded4a027eacc4e8c75af
 		conn.sendall(line)
      
 	conn.close()
@@ -59,11 +50,8 @@ def clientthread(conn):
 
 
 
-<<<<<<< HEAD
 ser = serial.Serial('/dev/ttyUSB0', 115200, timeout=1)
-=======
-ser = serial.Serial('/dev/ttyUSB1', 115200, timeout=1)
->>>>>>> 8cd66d00285719979817ded4a027eacc4e8c75af
+
 
 msg_queue = Queue.Queue(1024)
  
@@ -90,8 +78,6 @@ print 'Socket now listening'
  
  
 
- 
- 
 
 start_new_thread(readserialthread,() )
 
@@ -102,12 +88,7 @@ while 1:
 
 	print 'Connected with ' + addr[0] + ':' + str(addr[1])
      
-<<<<<<< HEAD
-#	start_new_thread(clientthread ,(conn,))
- 
-s.close()
-=======
 	start_new_thread(clientthread ,(conn,))
  
 s.close()
->>>>>>> 8cd66d00285719979817ded4a027eacc4e8c75af
+
