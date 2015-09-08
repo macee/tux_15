@@ -1,0 +1,7 @@
+The answer to the question is the web address (a.k.a. URL) associated with IP address 138.29.1.1
+
+Hint you can find the URL by:
+
+    a) performing a reverse DNSlookup by using command line "dig -x 138.29.1.1"
+
+    b) entering the IP address 138.29.1.1 into the address bar
