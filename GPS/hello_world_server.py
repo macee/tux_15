@@ -1,56 +1,42 @@
 '''
-    Simple socket server using threads
+    GPS socket server
 '''
+# FIXME We should be able to serve the same data to multiple clients. While many clients can 
+# connnect to this server they do not share the queue properly. consiquently, each client sees 
+# only a portion of the data...
 
-import serial
+
 import threading
 import Queue
  
 import socket
 import sys
+import time
 from thread import *
 
 
 def readserialthread():
+    
+	cnt = 1;
 
-	target = open("GPS_data.txt", 'a')
-	target.truncate()	
-	while 1:
-	
-		try:
-			data = ser.readline()
-			msg = data.encode("HEX")
-        		preamble = msg[0:6]
-        		message_ID = msg[:2]
-        		lat = int(msg[26:34], 16)
-        		lon = int(msg[34:42], 16)
-			alt = int(msg[42:50], 16)
-			sea = int(msg[50:58], 16)
-			line =  "{}, {}, {}".format(lat,lon, sea)
-			print line
-			target.write(line + "\n")
-			msg_queue.put(data)
-			#print data
-		except:
-			print "gps binary transfer error"
+	while True:
+		msg = "Hello World " + str(cnt) + "\n"
+		msg_queue.put(msg)
+		cnt = cnt + 1;
+		time.sleep(0.5)
+
 
 
 def clientthread(conn):
 
 	conn.send('Welcome to the GPS server\n')
-    
+#	msg_queue.join()
+
 	while True:
-         
 		line = msg_queue.get()
-		print '{:x}'.format(line)
 		conn.sendall(line)
-     
 	conn.close()
  
-
-
-
-ser = serial.Serial('/dev/ttyUSB0', 115200, timeout=1)
 
 
 msg_queue = Queue.Queue(1024)
@@ -67,28 +53,21 @@ event = threading.Event()
 try:
     s.bind((HOST, PORT))
 except socket.error as msg:
-    print 'Bind failed. Error Code : ' + str(msg[0]) + ' Message ' + msg[1]
-    sys.exit()
-     
+	print 'Bind failed. Error Code : ' + str(msg[0]) + ' Message ' + msg[1]
+	sys.exit()
+      
+start_new_thread(readserialthread,() )
+   
 print 'Socket bind complete'
  
 #Start listening on socket
 s.listen(10)
 print 'Socket now listening'
  
- 
-
-
-start_new_thread(readserialthread,() )
-
-
 while 1:
  
 	conn, addr = s.accept()
-
 	print 'Connected with ' + addr[0] + ':' + str(addr[1])
-     
 	start_new_thread(clientthread ,(conn,))
- 
-s.close()
 
+s.close()
