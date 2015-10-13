@@ -1,0 +1,11 @@
+#!/bin/bash
+
+netcat -lk -p 11111 | while read line
+do
+    match=$(echo $line | grep -c 'abc')
+    if [ $match -eq 1 ]; then
+      echo "good"
+    else
+      echo "bad"
+    fi
+done
