@@ -1,10 +1,10 @@
 #!/bin/bash
 
-netcat -lk -p 11111 | while read line
+nc localhost 8888 -w 10 | while read line
 do
-    match=$(echo $line | grep -c 'abc')
+    match=$(echo $line | grep -c 'GGA')
     if [ $match -eq 1 ]; then
-      echo "good"
+      echo $line
     else
       echo "bad"
     fi
